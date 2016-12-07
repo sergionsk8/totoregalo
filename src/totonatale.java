@@ -6,7 +6,7 @@
 	algoritmo di Fisher-Yates per il calcolo della permutazione.
 	Novembre 2013
 */
-
+	
 package sergionsk8.totonatale;
 
 import java.util.LinkedList;
