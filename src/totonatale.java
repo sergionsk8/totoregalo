@@ -25,8 +25,9 @@ public class totonatale {
 			
 			if (cilindro.estrai()) {
 				System.out.println("Estrazione eseguita correttamente!");
-				cilindro.stampa();
-				//cilindro.inviaEmail();
+				//cilindro.stampa();
+				cilindro.inviaEmail();
+				System.out.println("Email inviate correttamente!");
 			} else
 				System.out.println("Errore");
 			
