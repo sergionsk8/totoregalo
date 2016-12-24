@@ -1,6 +1,7 @@
-/email.class
-/emailmult.class
-/estrazione.class
-/totonatale.class
+*.class
 /bin/
 /sergionsk8/
+res/totonatale
+.project
+.classpath
+.settings
