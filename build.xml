@@ -1,5 +1,5 @@
-<project name="totonatale" default="run" basedir=".">
-	
+<project xmlns:if="ant:if" name="totonatale" default="run" basedir=".">
+
 	<description>
 		totoregali build file
 	</description>
@@ -13,25 +13,27 @@
 		<!-- Create the time stamp -->
 		<tstamp/>
 	</target>
-	
+
 	<target name="compile" depends="init" description="compile the source">
 		<!-- Compile the java code from ${src} into ${build} -->
 		<javac includeantruntime="false" classpath="${classpath}" srcdir="${src}" destdir="."/>
 	</target>
-	
+
 	<target name="run" depends="compile">
+		<echo>${filename}</echo>
 		<java classname="${classname}">
+			<arg value="${filename}"/>
 			<classpath>
 				<pathelement path="${classpath}"/>
 				<pathelement location="."/>
 			</classpath>
 		</java>
 	</target>
-	
+
 	<target name="clean" description="clean up">
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
 	</target>
-	
+
 </project>

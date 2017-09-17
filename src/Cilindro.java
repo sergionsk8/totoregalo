@@ -8,19 +8,26 @@ import javax.mail.internet.*;
 public class Cilindro {
 	private List<Partecipante> partecipanti = new LinkedList<>();
 	private List<String> riceventi = new LinkedList<>();
-	private String filename = "res/totonatale";
+	private String filename = "example/totoexample";
 	private int maxTry = 10;
-	
+
 	public Cilindro() {
 		//this.readSettings();
 		this.leggiDaFile();
 		Collections.shuffle(this.partecipanti);
 	}
-	
+
+	public Cilindro(String filename) {
+		//this.readSettings();
+		this.filename = filename;
+		this.leggiDaFile();
+		Collections.shuffle(this.partecipanti);
+	}
+
 	public void shuffle() {
 		Collections.shuffle(this.partecipanti);
 	}
-	
+
 	// legge i partecipanti ed i rispettivi indirizzi email da file
 	private void leggiDaFile() {
 		try {
@@ -41,15 +48,15 @@ public class Cilindro {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<String> getRiceventi() {
 		return this.riceventi;
 	}
-	
+
 	public List<Partecipante> getPartecipanti() {
 		return this.partecipanti;
 	}
-	
+
 	// TODO: Se la logica di estrazione è corretta, serve quest'altro check?
 	public boolean check() {
 		for (Partecipante p : partecipanti) {
@@ -58,7 +65,7 @@ public class Cilindro {
 		}
 		return true;
 	}
-	
+
 	// Estrae una combinazione corretta.
 	// Ritorna false dopo maxTry tentativi non andati a buon fine.
 	public boolean estrai() {
@@ -73,7 +80,7 @@ public class Cilindro {
 		}
 		return this.finalCheck();
 	}
-	
+
 	// Esegue una singola estrazione tenendo conto di tutti i vincoli
 	public boolean provaEstrazione() {
 		Random rnd = new Random();
@@ -100,7 +107,7 @@ public class Cilindro {
 		}
 		return true;
 	}
-	
+
 	// Stampa i risultati
 	public void stampa() {
 		for (Partecipante partecipante : partecipanti) {
@@ -113,7 +120,7 @@ public class Cilindro {
 	public boolean finalCheck() {
 		List<String> finalRec = new LinkedList<>();
 		List<String> finalPart = new LinkedList<>();
-		
+
 		for (Partecipante p : this.partecipanti) {
 			for (String tPart : finalPart) {
 				if (p.getNome().equals(tPart)) {
@@ -130,10 +137,10 @@ public class Cilindro {
 			}
 			finalRec.add(p.getRicevente());
 		}
-		
+
 		if (finalRec.size() != finalPart.size())
 			return false;
-		
+
 		return true;
 	}
 
@@ -156,13 +163,13 @@ public class Cilindro {
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.port", "587");
-			
+
 			// apre una sessione smtp
 			Session session = Session.getInstance(props);
-			
+
 			//crea un nuovo oggetto email
 			MimeMessage msg = new MimeMessage(session);
-			
+
 			// da qui in poi, si possono inviare più email nella stessa sessione
 			try {
 				Transport t = session.getTransport("smtps");
@@ -175,7 +182,7 @@ public class Cilindro {
 						msg.setFrom(new InternetAddress(username));
 						msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(p.getEmail()));
 						msg.setSubject("TotoNatale 2016");
-						msg.setText("Ciao " + p.getNome() + ",\nquesto Natale, fai un regalo a " + p.getRicevente() + "!\n\nUn saluto,\nSergio" + 
+						msg.setText("Ciao " + p.getNome() + ",\nquesto Natale, fai un regalo a " + p.getRicevente() + "!\n\nUn saluto,\nSergio" +
 										"\n\n\n\ntotonatale 2016");
 						t.sendMessage(msg, msg.getAllRecipients());
 						System.out.println("Email a " + p.getNome() + " inviata correttamente");
@@ -186,7 +193,7 @@ public class Cilindro {
 				t.close();
 			} catch(NoSuchProviderException nspe) {
 				nspe.printStackTrace();
-			}	
+			}
 		} catch(MessagingException me) {
 			me.printStackTrace();
 		}
