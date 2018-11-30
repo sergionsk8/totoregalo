@@ -1,7 +1,9 @@
 *.class
 /bin/
 /sergionsk8/
-res/totonatale
+res/totonatale*
+res/invalidpairs*
 .project
 .classpath
 .settings
+secure.txt
