@@ -10,16 +10,17 @@ public class Cilindro {
 	private List<String> riceventi = new LinkedList<>();
 	private String filename = "example/totoexample";
 	private int maxTry = 10;
+	private String year;
 
-	public Cilindro() {
-		//this.readSettings();
-		this.leggiDaFile();
-		Collections.shuffle(this.partecipanti);
-	}
+	// public Cilindro() {
+	// 	//this.readSettings();
+	// 	this.leggiDaFile();
+	// 	Collections.shuffle(this.partecipanti);
+	// }
 
-	public Cilindro(String filename) {
-		//this.readSettings();
+	public Cilindro(String filename, String anno) {
 		this.filename = filename;
+		this.year = anno;
 		this.leggiDaFile();
 		Collections.shuffle(this.partecipanti);
 	}
@@ -181,9 +182,9 @@ public class Cilindro {
 						// set the message content here
 						msg.setFrom(new InternetAddress(username));
 						msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(p.getEmail()));
-						msg.setSubject("TotoNatale 2016");
-						msg.setText("Ciao " + p.getNome() + ",\nquesto Natale, fai un regalo a " + p.getRicevente() + "!\n\nUn saluto,\nSergio" +
-										"\n\n\n\ntotonatale 2016");
+						msg.setSubject("TotoNatale " + year);
+						//msg.setText("Ciao " + p.getNome() + ",\nquesto è un messaggio di test.\n\nUn saluto,\nSergio\n\n\n\ntotonatale test 2017");
+						msg.setText("Ciao " + p.getNome() + ",\nquesto Natale, fai un regalo a " + p.getRicevente() + "!\n\nUn saluto,\nSergio\n\n\ntotonatale " + year);
 						t.sendMessage(msg, msg.getAllRecipients());
 						System.out.println("Email a " + p.getNome() + " inviata correttamente");
 					} catch(AddressException ae) {

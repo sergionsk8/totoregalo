@@ -20,9 +20,10 @@
 	</target>
 
 	<target name="run" depends="compile">
-		<echo>${filename}</echo>
 		<java classname="${classname}">
-			<arg value="${filename}"/>
+			<arg value="${anno}"/>
+			<arg value="${partecipanti}"/>
+			<arg value="${invalidpairs}"/>
 			<classpath>
 				<pathelement path="${classpath}"/>
 				<pathelement location="."/>

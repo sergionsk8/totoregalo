@@ -1,5 +1,6 @@
 package sergionsk8.totonatale;
 
+import java.io.*;
 import java.util.AbstractMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,25 @@ public class Partecipante {
 		this.ricevente = null;
 	}
 	
+	public static void setInvalidPairs(String invalidpairs_filename) {
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(invalidpairs_filename));
+			String line = in.readLine();
+			while (line != null) {
+				String[] pair = line.split(";");
+				setInvalidPair(pair[0].trim(), pair[1].trim());
+				line = in.readLine();
+			}
+			in.close();
+		} catch (FileNotFoundException fe) {
+			fe.printStackTrace();
+		} catch(IOException ioe) {
+			ioe.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void setInvalidPair(String user1, String user2) {
 		if (invalidPairs == null)
 			invalidPairs = new LinkedList<Map.Entry<String, String>>();

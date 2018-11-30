@@ -16,22 +16,22 @@ public class totonatale {
 
 	public static void main(String[] args) {
 		try {
+			String year;
 			Cilindro cilindro;
-			if (args.length == 1){
-				System.out.println(args[0]);
-				cilindro = new Cilindro(args[0]);
-			}else {
-				cilindro = new Cilindro();
-				System.out.println("niente");
+			String invalidPairs;
+			if (args.length != 3){
+				System.out.println("Numero di argomenti non valido");
+				System.exit(1);
 			}
-			//Partecipante.setInvalidPair("Gian", "Carla");
-			//Partecipante.setInvalidPair("Sergio", "Miriana");
-			//Partecipante.setInvalidPair("Germano", "Lucrezia");
-			//Partecipante.setInvalidPair("Raffio", "Serena");
+			year = new String(args[0]);
+			cilindro = new Cilindro(args[1], year);
+			invalidPairs = new String(args[2]);
+			
+			Partecipante.setInvalidPairs(invalidPairs);
 
 			if (cilindro.estrai()) {
 				System.out.println("Estrazione eseguita correttamente!");
-				cilindro.stampa();
+				//cilindro.stampa();
 				cilindro.inviaEmail();
 				System.out.println("Email inviate correttamente!");
 			} else
