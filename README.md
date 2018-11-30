@@ -13,5 +13,5 @@ player2;player2@email.com
 Una volta preparato il file dei partecipanti, spostarsi nella directory principale e lanciare la compilazione e l'esecuzione tramite:
 
 ```
-ant run -Danno=2018 -Dpartecipanti=res/provonatale -Dinvalidpairs=res/invalidpairs
+ant run -Danno=2018 -Dpartecipanti=example/totoexample -Dinvalidpairs=example/invalidpairs
 ```
